@@ -5,8 +5,19 @@ let colorOne = document.getElementById("color1");
 let colorTwo = document.getElementById("color2");
 let body = document.getElementById("gradient");
 let currentColor = document.getElementById("mevcutRenk");
+let copyBtn = document.getElementById("kopyala");
 
-
+function Clipboard_CopyTo(value) {
+    var tempInput = document.createElement("input");
+    tempInput.value = value;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+  }
+  
+  copyBtn.addEventListener("click",Clipboard_CopyTo);
+  
 
 // Renk değiştir
 function changeRenk() {
@@ -21,11 +32,7 @@ function changeRenk() {
 }
 
 
-function kopyala() {
-    
-}
-
-
+  
 
 
 colorOne.addEventListener("input", changeRenk);
