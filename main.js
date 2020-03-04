@@ -7,17 +7,7 @@ let body = document.getElementById("gradient");
 let currentColor = document.getElementById("mevcutRenk");
 let copyBtn = document.getElementById("kopyala");
 
-function Clipboard_CopyTo(value) {
-    var tempInput = document.createElement("input");
-    tempInput.value = value;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-  }
-  
-  copyBtn.addEventListener("click",Clipboard_CopyTo);
-  
+
 
 // Renk değiştir
 function changeRenk() {
@@ -31,6 +21,27 @@ function changeRenk() {
     currentColor.innerHTML = body.style.background +";";
 }
 
+function selectText(node) {
+  node = document.getElementById(node);
+
+  if (document.body.createTextRange) {
+      const range = document.body.createTextRange();
+      range.moveToElementText(node);
+      range.select();
+  } else if (window.getSelection) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      selection.removeAllRanges();
+      selection.addRange(range);
+  } else {
+      console.warn("Could not select text in node: Unsupported browser.");
+  }
+  document.execCommand("copy")
+}
+
+const clickable = document.querySelector('.click-me');
+clickable.addEventListener('click', () => selectText('mevcutRenk'));
 
   
 
